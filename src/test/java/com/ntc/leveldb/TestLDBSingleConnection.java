@@ -110,12 +110,12 @@ public class TestLDBSingleConnection {
             for (int i=0; i<30; i++) {
                 mapData.put(key+i, value+i);
             }
-            System.out.println("mapData: " + mapData);
+            //System.out.println("mapData: " + mapData);
             conn.putBatch(mapData);
             List<String> listKey = new ArrayList<>(mapData.keySet());
             Collections.reverse(listKey);
             Map<String, String> mapRs1 = conn.getList(listKey);
-            System.out.println("mapRs1: " + mapRs1);
+            //System.out.println("mapRs1: " + mapRs1);
             
             Assert.assertEquals("testPutGetBatch size", mapData.size(), mapRs1.size());
             
@@ -167,7 +167,8 @@ public class TestLDBSingleConnection {
             }
             
             //System.out.println("=========== End All Thread ===========");
-            int end = getCounter();
+            //int end = getCounter();
+            long end = getCounter2();
             //System.out.println("Final Counter: " + end);
             Assert.assertEquals("testMultiConnDB", k*n, end);
         } catch (Exception e) {
@@ -192,8 +193,9 @@ public class TestLDBSingleConnection {
         public void run() {
             for (int i=0; i<num; i++) {
                 //System.out.println("Counter " + index + " incCounter: " + incCounter());
-                incCounter2();
+                //incCounter2();
                 //System.out.println("Counter " + index + " incCounter2: " + incCounter2());
+                incCounter3();
             }
         }
         
@@ -209,6 +211,10 @@ public class TestLDBSingleConnection {
         private int incCounter2() {
             return con.incInt(keyCounter, 1);
         }
+        
+        private long incCounter3() {
+            return con.incLong(keyCounter, 1);
+        }
     }
     
     private int initCounter() {
@@ -222,6 +228,12 @@ public class TestLDBSingleConnection {
     private int getCounter() {
         byte[] bk = nls.serializeString(keyCounter);
         int rs1 = nls.deserializeInt(conn.getByte(bk));
+        return rs1;
+    }
+    
+    private long getCounter2() {
+        byte[] bk = nls.serializeString(keyCounter);
+        long rs1 = nls.deserializeLong(conn.getByte(bk));
         return rs1;
     }
 }

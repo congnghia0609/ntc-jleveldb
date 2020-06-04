@@ -307,4 +307,26 @@ public class LDBConnection {
             }
         }
     }
+    
+    synchronized public int incInt(String key, int value) {
+        int rs = 0;
+        if (key != null && !key.isEmpty()) {
+            byte[] bk = nls.serializeString(key);
+            byte[] bv = db.get(bk);
+            rs = bv != null ? nls.deserializeInt(bv) + value : value;
+            db.put(bk, nls.serializeInt(rs));
+        }
+        return rs;
+    }
+    
+    synchronized public long incLong(String key, long value) {
+        long rs = 0L;
+        if (key != null && !key.isEmpty()) {
+            byte[] bk = nls.serializeString(key);
+            byte[] bv = db.get(bk);
+            rs = bv != null ? nls.deserializeLong(bv) + value : value;
+            db.put(bk, nls.serializeLong(rs));
+        }
+        return rs;
+    }
 }
