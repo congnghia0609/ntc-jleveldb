@@ -82,7 +82,7 @@ public class TestNLSerializer {
     }
     
     @Test
-    public void testSDString() {;
+    public void testSDString() {
         String s1 = "nghiatc";
         byte[] ss = nls.serializeString(s1);
         String s2 = nls.deserializeString(ss);

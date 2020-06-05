@@ -151,7 +151,7 @@ public class TestLDBSingleConnection {
         try {
             int k = 5;
             int n = 1000;
-            //int c = initCounter();
+            int c = initCounter();
             //System.out.println("initCounter: " + c);
             
             List<Thread> listTh = new ArrayList<>();

@@ -91,14 +91,6 @@ public class LDBConnection {
         this.options = opts;
         init(pathDB);
     }
-
-//    public void openLDB(){
-//        try {
-//            db = factory.open(new File(dbDirectory), options);
-//        } catch (Exception ex) {
-//            logger.error("openLDB: ", ex);
-//        }
-//    }
     
     public void close() {
         try {

@@ -140,15 +140,6 @@ public class LDBSingleConnection {
         return _instance;
     }
 
-//    public void openLDB() {
-//        try {
-//            lockLDB.lock();
-//            db = factory.open(new File(dbDirectory), options);
-//        } catch (Exception ex) {
-//            logger.error("openLDB: ", ex);
-//        }
-//    }
-
     public void close() {
         try {
             if (db != null) {
@@ -215,7 +206,7 @@ public class LDBSingleConnection {
                 }
                 db.write(batch);
             } catch (Exception ex) {
-                logger.error("putBatch: ", ex);
+                logger.error("putBatchByte: ", ex);
             } finally {
                 // Make sure you close the batch to avoid resource leaks.
                 if (batch != null) {
@@ -228,13 +219,12 @@ public class LDBSingleConnection {
     public String get(String key) {
         try {
             if (key != null && !key.isEmpty()) {
-                String rs = asString(db.get(bytes(key)));
-                return rs;
+                return asString(db.get(bytes(key)));
             }
         } catch (Exception ex) {
             logger.error("get: ", ex);
         }
-        return "";
+        return null;
     }
 
     public Map<String, String> getList(List<String> listKey) {
