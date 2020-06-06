@@ -1,6 +1,15 @@
 # ntc-jleveldb
 ntc-jleveldb is a module swapper java leveldb
 
+## Maven
+```Xml
+<dependency>
+    <groupId>com.streetcodevn</groupId>
+    <artifactId>ntc-jleveldb</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 ## Usage
 ```java
 NLSerializer nls = new NLSerializer();
